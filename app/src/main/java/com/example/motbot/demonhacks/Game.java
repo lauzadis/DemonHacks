@@ -1,142 +1,132 @@
 package com.example.motbot.demonhacks;
 
-import android.support.v7.app.AppCompatActivity;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 
-public class Game extends AppCompatActivity {
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.widget.Toast;
+import android.util.Log;
+import android.view.Menu;
+
+import com.here.android.mpa.common.GeoCoordinate;
+import com.here.android.mpa.common.OnEngineInitListener;
+import com.here.android.mpa.mapping.Map;
+import com.here.android.mpa.mapping.MapCircle;
+import com.here.android.mpa.mapping.MapFragment;
+
+public class Game extends Activity {
+    private static final String LOG_TAG = Game.class.getSimpleName();
+
+    // permissions request code
+    private final static int REQUEST_CODE_ASK_PERMISSIONS = 1;
+
+    private static final String[] REQUIRED_SDK_PERMISSIONS = new String[] {
+            Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE };
+
+    // map embedded in the map fragment
+    private Map map = null;
+
+    // map fragment embedded in this activity
+    private MapFragment mapFragment = null;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        checkPermissions();
     }
-    public class Tower {
-        private int level = 1;
-        private int max_health = 1500 * level;
-        private int max_shield = 0;
-        private int health;
-        private int shield;
-        private Gun gun = Gun(1);
-        private int resources = 0;
-        private int coins = 0;
-        private GeoCoordinate geo = GeoCoordinate(0,0,0);
-        //Constructor
-        public Tower() {
-            setHealth(getMax_health());
-            setShield(getMax_shield());
-        }
-        Getters and Setters
-        public Gun getGun() {
-            return gun;
-        }
 
-        public GeoCoordinate getGeoCoordinate() {
-            return geo;
-        }
+    // Google has deprecated android.app.Fragment class. It is used in current SDK implementation.
+    // Will be fixed in future SDK version.
+    @SuppressWarnings("deprecation")
+    private MapFragment getMapFragment() {
+        return (MapFragment) getFragmentManager().findFragmentById(R.id.mapfragment);
+    }
 
-        public int getHealth() {
-            return health;
-        }
+    private void initialize() {
 
-        public void setHealth(int health) {
-            this.health = health;
-        }
 
-        public int getShield() {
-            return shield;
-        }
+        // Search for the map fragment to finish setup by calling init().
+        mapFragment = getMapFragment();
+        mapFragment.init(new OnEngineInitListener() {
+            @Override
+            public void onEngineInitializationCompleted(OnEngineInitListener.Error error) {
+                if (error == OnEngineInitListener.Error.NONE) {
 
-        public void setShield(int shield) {
-            this.shield = shield;
-        }
+                    LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+                    Location location = lm.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+                    double longitude = location.getLongitude();
+                    double latitude = location.getLatitude();
 
-        public int getLevel() {
-            return level;
-        }
+                    map = mapFragment.getMap();
 
-        public void setLevel(int level) {
-            this.level = level;
-        }
+                    GeoCoordinate userLocation = new GeoCoordinate(latitude, longitude, 0.0);
+                    map.setCenter(new GeoCoordinate(latitude,longitude,0.0),
+                    Map.Animation.NONE);
 
-        public void setMax_health(int max_health) {
-            this.max_health = max_health;
-        }
+                    map.setZoomLevel(map.getMaxZoomLevel());
+                    MapCircle userDot = new MapCircle(1, userLocation);
+                    map.addMapObject(userDot);
+                } else {
+                    Log.e(LOG_TAG, "Cannot initialize MapFragment (" + error + ")");
+                }
+            }
+        });
+    }
 
-        public void setMax_shield(int max_shield) {
-            this.max_shield = max_shield;
-        }
-
-        public int getResources() {
-            return resources;
-        }
-
-        public void setResources(int resources) {
-            this.resources = resources;
-        }
-
-        public int getCoins() {
-            return coins;
-        }
-
-        public void setCoins(int coins) {
-            this.coins = coins;
-        }
-
-        public int getMax_shield() {
-            return max_shield;
-        }
-
-        public int getMax_health() {
-            return max_health;
-        }
-        //Tower Functions
-        //Upgrades tower to next level using resources while healing to maximum health
-        public void upgrade() {
-            switch(getLevel()) {
-                case 1:
-                    if(getResources() >= 500) {
-                        setLevel(2);
-                        setResources(getResources() - 500);
-                        setMax_health(getLevel() * 1500);
-                        setHealth(getMax_health());
-                    }
-                    break;
-                case 2:
-                    if(getResources() >= 1000) {
-                        setLevel(3);
-                        setResources(getResources() - 1000);
-                        setMax_health(getLevel() * 1500);
-                        setHealth(getMax_health());
-                    }
-                    break;
-                case 3:
-                    if(getResources() >= 5000) {
-                        setLevel(4);
-                        setResources(getResources() - 5000);
-                        setMax_health(getLevel() * 1500);
-                        setHealth(getMax_health());
-                    }
-                    break;
-                case 4:
-                    if(getResources() >= 10000) {
-                        setLevel(5);
-                        setResources(getResources() - 10000);
-                        setMax_health(getLevel() * 1500);
-                        setHealth(getMax_health());
-                    }
-                    break;
-                default:
-                    break;
+    /**
+     * Checks the dynamically controlled permissions and requests missing permissions from end user.
+     */
+    protected void checkPermissions() {
+        final List<String> missingPermissions = new ArrayList<String>();
+        // check all required dynamic permissions
+        for (final String permission : REQUIRED_SDK_PERMISSIONS) {
+            final int result = ContextCompat.checkSelfPermission(this, permission);
+            if (result != PackageManager.PERMISSION_GRANTED) {
+                missingPermissions.add(permission);
             }
         }
-        //Repairs the tower to maximum health using resources
-        public void repair() {
-            int missing_health = getMax_health() - getHealth();
-            if(getResources() > missing_health) {
-                setHealth(getMax_health());
-                setResources(getResources() - missing_health);
-            }
-
+        if (!missingPermissions.isEmpty()) {
+            // request all missing permissions
+            final String[] permissions = missingPermissions
+                    .toArray(new String[missingPermissions.size()]);
+            ActivityCompat.requestPermissions(this, permissions, REQUEST_CODE_ASK_PERMISSIONS);
+        } else {
+            final int[] grantResults = new int[REQUIRED_SDK_PERMISSIONS.length];
+            Arrays.fill(grantResults, PackageManager.PERMISSION_GRANTED);
+            onRequestPermissionsResult(REQUEST_CODE_ASK_PERMISSIONS, REQUIRED_SDK_PERMISSIONS,
+                    grantResults);
         }
-    }//end Tower
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[],
+                                           @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CODE_ASK_PERMISSIONS:
+                for (int index = permissions.length - 1; index >= 0; --index) {
+                    if (grantResults[index] != PackageManager.PERMISSION_GRANTED) {
+                        // exit the app if one permission is not granted
+                        Toast.makeText(this, "Required permission '" + permissions[index]
+                                + "' not granted, exiting", Toast.LENGTH_LONG).show();
+                        finish();
+                        return;
+                    }
+                }
+                // all permissions were granted
+                initialize();
+                break;
+        }
+    }
 }

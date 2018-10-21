@@ -1,5 +1,7 @@
-import java.util.Random;
 package com.example.motbot.demonhacks;
+import com.example.motbot.demonhacks.Tower;
+
+import java.util.Random;
 
 public class Attack {
     private int mobs;
@@ -35,7 +37,7 @@ public class Attack {
             default:
                 break;
         }
-        coins = mobs + (int) Math.ceil(mobs* Math.random()*(t.getGun().getGunMultiplier()));
+        coins = mobs + (int) Math.ceil(mobs* Math.random()*((t.getGun().getGunMultiplier())));
         message = "Your tower was attacked! Your defenses killed " +
                 mobs + " enemies who did " + damage + ". You gained " +
                 coins + " coins in the attack!";

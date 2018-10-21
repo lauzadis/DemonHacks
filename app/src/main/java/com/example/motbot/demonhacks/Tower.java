@@ -1,4 +1,7 @@
 package com.example.motbot.demonhacks;
+
+import com.here.android.mpa.common.GeoCoordinate;
+
 public class Tower {
     private int level = 1;
     private int max_health = 1500 * level;
@@ -10,9 +13,6 @@ public class Tower {
     private int coins = 0;
     private GeoCoordinate geo = new GeoCoordinate(0,0,0);
     //Constructor
-    public Tower(GeoCoordinate geo) {
-        this.geo = geo;
-    }
     public Tower() {
         setHealth(getMax_health());
         setShield(getMax_shield());
@@ -24,10 +24,6 @@ public class Tower {
 
     public GeoCoordinate getGeoCoordinate() {
         return geo;
-    }
-
-    public void setGeo(GeoCoordinate geo) {
-        this.geo = geo;
     }
 
     public int getHealth() {
