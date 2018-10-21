@@ -7,7 +7,7 @@ public class Gun {
 
     //Higher tiers add a higher possible range of coins received per attack
     //for example player receives 100 coins per attack + up to 10% bonus at tier 1
-    private float gunMultiplier;
+    private double gunMultiplier;
 
     //Each weapon tier has a specific cost to purchase the weapon
     private int cost;
@@ -54,5 +54,12 @@ public class Gun {
             default:
                 return 0;
         }
+    }
+
+    /**
+     * @return the gun multiplier which affects coins gained per attack
+     */
+    public double getGunMultiplier(){
+        return this.gunTier/10.0;
     }
 }
