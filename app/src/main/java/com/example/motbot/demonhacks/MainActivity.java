@@ -32,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
                 if(email.getText().toString().equals(emails) && password.getText().toString().equals(passwords))
                 {
                     tv.setText("Confirmed");
-                    Intent map = new Intent(getApplicationContext(), Map.class);
-                    startActivity(map);
+                    //Intent game = new Intent(getApplicationContext(), Game.class);
+                   // startActivity(game);
                 }
 
                 else
