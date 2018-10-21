@@ -22,79 +22,125 @@ public class vendor extends AppCompatActivity {
         setContentView(R.layout.activity_vendor);
 
         //Fetch player's maximum money available to spend
+
         final Tower userTower = (Tower) getIntent().getExtras().get("tower");
-        final int currency = userTower.getCoins();
+        int currency = userTower.getCoins();
+
+  
 
         //Instantiate textfield and both buttons in vending scene
-        final TextView coinsLabel = (TextView)findViewById(R.id.coinsLabel);
-        TextView affordLabel = (TextView)findViewById(R.id.affordLabel); //tells user whether or not they can afford the item
-        TextView needLabel = (TextView)findViewById(R.id.needLabel); //tells user how many more coins they need to afford the item
-        final Button gunButton = (Button)findViewById(R.id.gunButton);
-        Button exit = (Button)findViewById(R.id.exit);
+        final TextView coinsLabel = (TextView) findViewById(R.id.coinsLabel);
+        TextView needLabel = (TextView) findViewById(R.id.needLabel); //tells user how many more coins they need to afford the item
+        final ImageButton gunButton = (ImageButton) findViewById(R.id.gunButton);
+        Button exit = (Button) findViewById(R.id.exit);
 
         //Display the user's budget
         coinsLabel.setText(currency + " Coins Available");
 
         //Fetch player's weapon data
+
         Gun currentUserGun = userTower.getGun();
         int gunTier = currentUserGun.getGunTier();
 
-        //default values for troubleshooting which should be overwritten anyways
-        int gunPrice = 99999;
-        String gunName = "Empty-Handed";
+
+        int gunTier = currentUserGun.getGunTier();
+        int gunPrice;
 
         //If the user's weapon is maxed out, make trade unavailable
-        if(gunTier == 5) //max tier
+        if (gunTier == 5) //max tier
         {
             gunButton.setEnabled(false); //disables clicking the object
-            gunButton.setText("Max Weapon Tier");
+            gunButton.setImageResource(R.drawable.gun5max);
+            gunPrice = 99999;
         }
         //Otherwise fetch the information for the next available weapon
-        else{
-            for(int i = 1; i <6; i++){
-                if(i == gunTier + 1){
-                    gunPrice = new Gun(i).getCost(); //captures the price of the weapon
-                    gunName = new Gun(i).getGunName();
+
+
+        else {
+            gunPrice = new Gun(gunTier + 1).getCost();
+        }
+            //If user cannot afford to purchase a new weapon, don't allow them to
+            if (currency < gunPrice) {
+                gunButton.setEnabled(false);
+                needLabel.setText("You need " + (User.getT().getCoins() - gunPrice) + "more coins!");
+                //Display the proper image for next purchase
+                switch (gunTier + 1) {
+                    case (2):
+                        gunButton.setImageResource(R.drawable.gun2unavailable);
+                        break;
+                    case (3):
+                        gunButton.setImageResource(R.drawable.gun3unavailable);
+                        break;
+                    case (4):
+                        gunButton.setImageResource(R.drawable.gun4unavailable);
+                        break;
+                    case (5):
+                        gunButton.setImageResource(R.drawable.gun5unavailable);
+                        break;
                 }
-            }
-            gunButton.setEnabled(false); //disables clicking the object
-        }
-        //If user cannot afford to purchase a new weapon, don't allow them to
-        if(currency < gunPrice){
-            gunButton.setEnabled(false);
-            affordLabel.setText("You cannot afford the " + gunName);
-            needLabel.setText("You need " + (userTower.getCoins() - gunPrice) + "more coins!");
-        }
-        //If can afford it, highlight border and change textto prompt purchasing
-        else{
-            gunButton.setHighlightColor(0xFFFF00);
-            gunButton.setText("Purchase " + gunName + "for " + gunPrice);
-        }
 
-        //Subtract money, disable box, change color, and change button text on purchase
-        gunButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            currency = currency - gunPrice;
-            userTower.setCoins(currency);
-            gunButton.setEnabled(false);
-            gunButton.setBackgroundColor(696969);
-            gunButton.setHighlightColor(000000);
-            coinsLabel.setText(currency + " Coins Remaining");
-            gunButton.setText("Thanks for your purchase!");
             }
-        });
+            //If user can afford it, display proper weapon
+            else {
+                switch (gunTier + 1) {
+                    case (2):
+                        gunButton.setImageResource(R.drawable.gun2withresources);
+                        break;
+                    case (3):
+                        gunButton.setImageResource(R.drawable.gun3withresources);
+                        break;
+                    case (4):
+                        gunButton.setImageResource(R.drawable.gun4withresources);
+                        break;
+                    case (5):
+                        gunButton.setImageResource(R.drawable.gun5withresources);
+                        break;
 
-        //Exit the shop scene when button pressed
-        exit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-             //TODO EXIT SHOP
                 }
+
+                //Subtract money, disable box, change image after purchase
+                gunButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //Need to recapture gunPrice and and gunTier
+                        Gun storeGun = new Gun(User.getT().getGun());
+                        int gunTier = storeGun.getGunTier();
+                        int gunPrice = storeGun.getCost();
+                        int currency = User.getT().getCoins();
+
+                        currency = currency - gunPrice;
+                        User.getT().setCoins(currency);
+                        gunButton.setEnabled(false);
+                        coinsLabel.setText(currency + " Coins Remaining");
+                        gunButton.setEnabled(false);
+                        switch (gunTier + 1) {
+                            case (2):
+                                gunButton.setImageResource(R.drawable.gun2unavailable);
+                                break;
+                            case (3):
+                                gunButton.setImageResource(R.drawable.gun3unavailable);
+                                break;
+                            case (4):
+                                gunButton.setImageResource(R.drawable.gun4unavailable);
+                                break;
+                            case (5):
+                                gunButton.setImageResource(R.drawable.gun5unavailable);
+                                break;
+                        }
+                    }
+                });
             }
 
-        );
 
+
+            //Exit the shop scene when button pressed
+            exit.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            finish();
+                                        }
+                                    }
+
+            )
     }//end onCreate
 }//end class
-
