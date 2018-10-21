@@ -11,16 +11,28 @@ public class Tower {
     private Gun gun = new Gun(1);
     private int resources = 0;
     private int coins = 0;
+    private long long TIME_CREATED;
     private GeoCoordinate geo = new GeoCoordinate(0,0,0);
     //Constructor
     public Tower(GeoCoordinate geo) {
         this.geo = geo;
         setHealth(getMax_health());
         setShield(getMax_shield());
+        setTimeCreated();
     }
     public Tower() {
         setHealth(getMax_health());
         setShield(getMax_shield());
+        setTimeCreated();
+    }
+
+    public void setTimeCreated(){
+        long TIME_CREATED = System.currentTimeMillis();
+    }
+
+    //Determine how long user has survived
+    public double getTimeSurvived(){
+        return (System.currentTimeMillis() - this.TIME_CREATED) / Math.pow(10,6);
     }
     //Getters and Setters
     public Gun getGun() {
