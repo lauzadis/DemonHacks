@@ -1,4 +1,4 @@
-import com.example.motbot.demonhacks.*;
+package com.example.motbot.demonhacks;
 public class Tower {
     private int level = 1;
     private int max_health = 1500 * level;
