@@ -11,12 +11,6 @@
         android:id="@+id/mapfragment"
         class="com.here.android.mpa.mapping.MapFragment"
         android:layout_width="match_parent"
-        android:layout_height="461dp" />
-
-    <Button
-        android:id="@+id/vendor"
-        android:layout_width="190dp"
-        android:layout_height="wrap_content"
-        android:text="Access Shop" />
+        android:layout_height="600dp" />
 
 </LinearLayout>
