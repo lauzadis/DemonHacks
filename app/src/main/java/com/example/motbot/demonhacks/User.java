@@ -1,37 +1,33 @@
 package com.example.motbot.demonhacks;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.IgnoreExtraProperties;
 
-@IgnoreExtraProperties
 public class User {
-
-    public String username;
-    public String password;
-    public int coins;
-    public int resources;
-    public int towerHealth;
-    public int towerTier;
-
-    public User() {
-        // Default constructor required for calls to DataSnapshot.getValue(User.class)
+    private String username;
+    private String password;
+    private Tower t;
+    //Constructor
+    public User(String usr, String pwrd) {
+        username = usr;
+        password = pwrd;
     }
-
-    public User(String username, String password, int coins, int resources, int towerHealth, int towerTier ) {
+    //Getters and Setters
+    public String getUsername() {
+        return username;
+    }
+    public void setUsername(String username) {
         this.username = username;
+    }
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
         this.password = password;
-        this.coins = coins;
-        this.resources = resources;
-        this.towerHealth = towerHealth;
-        this.towerTier = towerTier;
     }
-
-    private void writeNewUser(String userId, String username, String password, int coins, int resources, int towerHealth, int towerTier ) {
-        User user = new User(username, password, coins, resources, towerHealth, towerTier);
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference();
-        myRef.child("users").child(userId).setValue(user);
+    public Tower getT() {
+        return t;
     }
-
+    public void setT(Tower t) {
+        this.t = t;
+    }
+    //Methods
 }

@@ -1,6 +1,9 @@
 package com.example.motbot.demonhacks;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +11,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
+import com.here.android.mpa.common.GeoCoordinate;
+import com.here.android.mpa.common.OnEngineInitListener;
+import com.here.android.mpa.mapping.Map;
+import com.here.android.mpa.mapping.MapCircle;
+import com.here.android.mpa.mapping.MapFragment;
+import android.content.Context;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -39,6 +54,26 @@ public class MainActivity extends AppCompatActivity {
                 EditText email = (EditText)findViewById(R.id.email);
                 EditText password = (EditText)findViewById(R.id.password);
 
+                //Snackbar.make(view, "Login success", 3000);
+
+                //Check the account - server check
+                String e = email.toString();
+                String p = password.toString();
+                //if e is new
+                User u = new User(e, p );
+                LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+                Location location = lm.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+                GeoCoordinate userLocation = new GeoCoordinate(location.getLatitude(), location.getLongitude(), 0.0);
+                u.setT(new Tower(userLocation));
+                //if e is old, check p and then run bottom
+                //import User u
+                //Has to run no matter what
+                Tower userTower = u.getT();
+                Intent game = new Intent(getApplicationContext(), Game.class);
+                startActivity(game);
+                /*
+
+
                 if(email.getText().toString().equals(emails) && password.getText().toString().equals(passwords))
                 {
                     tv.setText("Confirmed");
@@ -50,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
                     tv.setText("False");
 
             }
+
                 //FirebaseDatabase database = FirebaseDatabase.getInstance();
                 //DatabaseReference myRef = database.getReference();
             //tv.setText(myRef.child("users").child("0vzWqJzkIQVGEkpyOG8w").child("username").getValue().toString());

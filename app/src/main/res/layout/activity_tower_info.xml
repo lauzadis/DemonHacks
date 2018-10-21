@@ -74,4 +74,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/upgrade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Upgrade"
+        tools:layout_editor_absoluteX="31dp"
+        tools:layout_editor_absoluteY="320dp" />
+
+    <Button
+        android:id="@+id/repair"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Repair"
+        tools:layout_editor_absoluteX="264dp"
+        tools:layout_editor_absoluteY="320dp" />
 </android.support.constraint.ConstraintLayout>
