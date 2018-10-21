@@ -6,6 +6,7 @@
     android:orientation="vertical" >
 
     <!-- Map Fragment embedded with the map object -->
+
     <fragment class="com.here.android.mpa.mapping.MapFragment"
         android:id="@+id/mapfragment"
         android:layout_width="match_parent"

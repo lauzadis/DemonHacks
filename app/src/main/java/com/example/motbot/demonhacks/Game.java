@@ -1,5 +1,6 @@
 package com.example.motbot.demonhacks;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -7,7 +8,9 @@ import java.util.List;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.PointF;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
@@ -22,11 +25,17 @@ import android.view.Menu;
 
 import com.here.android.mpa.common.GeoCoordinate;
 import com.here.android.mpa.common.OnEngineInitListener;
+import com.here.android.mpa.common.ViewObject;
 import com.here.android.mpa.mapping.Map;
 import com.here.android.mpa.mapping.MapCircle;
 import com.here.android.mpa.mapping.MapFragment;
+import com.here.android.mpa.mapping.MapGesture;
+import com.here.android.mpa.mapping.MapMarker;
+import com.here.android.mpa.mapping.MapObject;
+import com.here.android.mpa.mapping.PositionIndicator;
 
 public class Game extends Activity {
+
     private static final String LOG_TAG = Game.class.getSimpleName();
 
     // permissions request code
@@ -65,26 +74,60 @@ public class Game extends Activity {
             public void onEngineInitializationCompleted(OnEngineInitListener.Error error) {
                 if (error == OnEngineInitListener.Error.NONE) {
 
-                    LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+                    LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
                     Location location = lm.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
                     double longitude = location.getLongitude();
                     double latitude = location.getLatitude();
 
                     map = mapFragment.getMap();
 
+
                     GeoCoordinate userLocation = new GeoCoordinate(latitude, longitude, 0.0);
-                    map.setCenter(new GeoCoordinate(latitude,longitude,0.0),
-                    Map.Animation.NONE);
+                    GeoCoordinate storeLocation = new GeoCoordinate(41.878286, -87.625234, 0.0);
+                    GeoCoordinate resourceLocation = new GeoCoordinate(41.878792, -87.625963, 0.0);
+                    map.setCenter(new GeoCoordinate(latitude, longitude, 0.0),
+                            Map.Animation.NONE);
 
                     map.setZoomLevel(map.getMaxZoomLevel());
                     MapCircle userDot = new MapCircle(1, userLocation);
                     map.addMapObject(userDot);
-                } else {
-                    Log.e(LOG_TAG, "Cannot initialize MapFragment (" + error + ")");
+
+                    com.here.android.mpa.common.Image storeImage = new com.here.android.mpa.common.Image();
+                    try {
+                        storeImage.setImageResource(R.drawable.coins);
+                    } catch (IOException e) {
+                        finish();
+                    }
+
+                    MapMarker storeDot = new MapMarker(storeLocation, storeImage);
+                    map.addMapObject(storeDot);
+
+                    com.here.android.mpa.common.Image resourceImage = new com.here.android.mpa.common.Image();
+                    try {
+                        resourceImage.setImageResource(R.drawable.diamond);
+                    } catch (IOException e) {
+                        finish();
+                    }
+
+                    MapMarker resourceDot = new MapMarker(resourceLocation, resourceImage);
+                    map.addMapObject(resourceDot);
+
+                    com.here.android.mpa.common.Image fortImage = new com.here.android.mpa.common.Image();
+                    try {
+                        fortImage.setImageResource(R.drawable.fort);
+                    } catch (IOException e) {
+                        finish();
+                    }
+
+                    MapMarker fortDot = new MapMarker(userLocation, fortImage);
+                    map.addMapObject(fortDot);
                 }
-            }
-        });
-    }
+
+
+                    // Create a gesture listener and add it to the MapFragment
+
+
+                    else Log.e(LOG_TAG, "Cannot initialize MapFragment (" + error + ")");}});}
 
     /**
      * Checks the dynamically controlled permissions and requests missing permissions from end user.
