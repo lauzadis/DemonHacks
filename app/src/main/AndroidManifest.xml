@@ -35,7 +35,6 @@
             android:value="kb9Xu6ir4ozFt3T2KfmMfg" />
 
         <activity android:name=".TowerInfo" />
-        <activity android:name=".userTower"></activity>
     </application>
 
 </manifest>

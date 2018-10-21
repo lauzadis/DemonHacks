@@ -41,9 +41,6 @@ public class vendor extends AppCompatActivity {
 
         Gun currentUserGun = userTower.getGun();
         int gunTier = currentUserGun.getGunTier();
-
-
-        int gunTier = currentUserGun.getGunTier();
         int gunPrice;
 
         //If the user's weapon is maxed out, make trade unavailable
@@ -62,7 +59,7 @@ public class vendor extends AppCompatActivity {
             //If user cannot afford to purchase a new weapon, don't allow them to
             if (currency < gunPrice) {
                 gunButton.setEnabled(false);
-                needLabel.setText("You need " + (User.getT().getCoins() - gunPrice) + "more coins!");
+                needLabel.setText("You need " + (userTower.getCoins() - gunPrice) + "more coins!");
                 //Display the proper image for next purchase
                 switch (gunTier + 1) {
                     case (2):
@@ -103,13 +100,13 @@ public class vendor extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         //Need to recapture gunPrice and and gunTier
-                        Gun storeGun = new Gun(User.getT().getGun());
+                        Gun storeGun = new Gun(userTower.getGun().getGunTier());
                         int gunTier = storeGun.getGunTier();
                         int gunPrice = storeGun.getCost();
-                        int currency = User.getT().getCoins();
+                        int currency = userTower.getCoins();
 
                         currency = currency - gunPrice;
-                        User.getT().setCoins(currency);
+                        userTower.setCoins(currency);
                         gunButton.setEnabled(false);
                         coinsLabel.setText(currency + " Coins Remaining");
                         gunButton.setEnabled(false);
@@ -141,6 +138,6 @@ public class vendor extends AppCompatActivity {
                                         }
                                     }
 
-            )
+            );
     }//end onCreate
 }//end class
