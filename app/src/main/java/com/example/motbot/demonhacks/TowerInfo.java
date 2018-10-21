@@ -25,6 +25,7 @@ public class TowerInfo extends AppCompatActivity {
         //Create all our labels and bars
         TextView healthLabel = (TextView)findViewById(R.id.healthlabel);
         TextView timeSurvivedProgress = (TextView)findViewById(R.id.timeSurvivedProgress);
+        TextView resources = (TextView)findViewById((R.id.resources));
         ProgressBar towerHealthBar = (ProgressBar)findViewById(R.id.towerHealthBar);
         final ImageView gunImage = (ImageView)findViewById((R.id.gunImage));
 
@@ -53,6 +54,7 @@ public class TowerInfo extends AppCompatActivity {
         //Setup label texts
         healthLabel.setText("Current Health : " + userTower.getHealth() + "/ " + userTower.getMax_health());
         timeSurvivedProgress.setText(userTower.getTimeSurvived()/(60*60) + " Days");
+        resources.setText(userTower.getResources());
 
             devGunCycle.setOnClickListener(new View.OnClickListener() {
                 @Override
