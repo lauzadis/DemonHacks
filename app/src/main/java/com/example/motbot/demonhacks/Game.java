@@ -58,7 +58,7 @@ public class Game extends Activity {
         setContentView(R.layout.activity_game);
         checkPermissions();
 
-        Button vendor = (Button)findViewById(R.id.vendor);
+        Button vendor = (Button)findViewById(R.id.vendortest);
         vendor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
