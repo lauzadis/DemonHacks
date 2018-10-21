@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+
 /**
  * Launches whenever player enters a shop
  * Can purchase a weapon or a soldier to increase health
@@ -95,3 +96,4 @@ public class vendor extends AppCompatActivity {
 
     }//end onCreate
 }//end class
+
