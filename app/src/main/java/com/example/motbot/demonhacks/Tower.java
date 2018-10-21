@@ -11,7 +11,7 @@ public class Tower {
     private Gun gun = new Gun(1);
     private int resources = 0;
     private int coins = 0;
-    private long long TIME_CREATED;
+    private long TIME_CREATED;
     private GeoCoordinate geo = new GeoCoordinate(0,0,0);
     //Constructor
     public Tower(GeoCoordinate geo) {
@@ -109,6 +109,7 @@ public class Tower {
     //Tower Functions
     //Upgrades tower to next level using resources while healing to maximum health
     public void upgrade() {
+        String message;
         switch(getLevel()) {
             case 1:
                 if(getResources() >= 500) {
@@ -116,6 +117,7 @@ public class Tower {
                     setResources(getResources() - 500);
                     setMax_health(getLevel() * 1500);
                     setHealth(getMax_health());
+                    message = "Upgrade successful";
                 }
                 break;
             case 2:
@@ -124,6 +126,7 @@ public class Tower {
                     setResources(getResources() - 1000);
                     setMax_health(getLevel() * 1500);
                     setHealth(getMax_health());
+                    message = "Upgrade successful";
                 }
                 break;
             case 3:
@@ -132,6 +135,7 @@ public class Tower {
                     setResources(getResources() - 5000);
                     setMax_health(getLevel() * 1500);
                     setHealth(getMax_health());
+                    message = "Upgrade successful";
                 }
                 break;
             case 4:
@@ -140,19 +144,26 @@ public class Tower {
                     setResources(getResources() - 10000);
                     setMax_health(getLevel() * 1500);
                     setHealth(getMax_health());
+                    message = "Upgrade successful";
                 }
                 break;
             default:
+                message = "Upgrade failed";
                 break;
         }
     }
     //Repairs the tower to maximum health using resources
     public void repair() {
+        String message;
         int missing_health = getMax_health() - getHealth();
-        if(getResources() > missing_health) {
+        if(getResources() > missing_health && missing_health!=0) {
             setHealth(getMax_health());
             setResources(getResources() - missing_health);
+            message = "Repair Successful";
+        } else {
+            message = "Repair Failed";
         }
+
 
     }
 }//end Tower
