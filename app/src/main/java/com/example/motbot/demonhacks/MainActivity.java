@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(about);
 
         Button login = (Button)findViewById(R.id.login);
+        Button vendortest = (Button)findViewById(R.id.vendortest);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,6 +40,14 @@ public class MainActivity extends AppCompatActivity {
                 else
                     tv.setText("False");
 
+            }
+        });
+
+        vendortest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent switchVendor = new Intent(getApplicationContext(),vendor.class);
+                startActivity(switchVendor);
             }
         });
 
