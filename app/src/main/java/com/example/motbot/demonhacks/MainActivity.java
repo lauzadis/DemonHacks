@@ -25,7 +25,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
+    Tower userTower = new Tower(new GeoCoordinate(41.878306, -87.625926,0.0));
     String emails = "matas";
     String passwords = "1";
     @Override
@@ -60,15 +60,19 @@ public class MainActivity extends AppCompatActivity {
                 //if e is old, check p and then run bottom
                 //import User u
                 //Has to run no matter what
-                Tower userTower = u.getT();
+                //Tower userTower = u.getT();
+
+
+
                 Intent game = new Intent(getApplicationContext(), Game.class);
-                game.putExtra("tower", userTower);
+               // game.putExtra("tower", userTower);
                 startActivity(game);
             }});
         vendortest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent vendorr = new Intent(getApplicationContext(), vendor.class);
+                //vendorr.putExtra("tower",userTower);
                 startActivity(vendorr);
             }
         });
@@ -77,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent towerinfo = new Intent(getApplicationContext(), TowerInfo.class);
+                //towerinfo.putExtra("tower",userTower);
                 startActivity(towerinfo);
             }
         });

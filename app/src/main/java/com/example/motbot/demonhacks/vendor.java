@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.here.android.mpa.common.GeoCoordinate;
+
 import org.w3c.dom.Text;
 
 
@@ -23,7 +25,9 @@ public class vendor extends AppCompatActivity {
 
         //Fetch player's maximum money available to spend
 
-        final Tower userTower = (Tower) getIntent().getExtras().get("tower");
+        //final Tower userTower = (Tower) getIntent().getExtras().get("tower");
+        final Tower userTower = new Tower(new GeoCoordinate(41.878306,-87.625926));
+        userTower.setCoins(200);
         int currency = userTower.getCoins();
 
   
@@ -59,7 +63,7 @@ public class vendor extends AppCompatActivity {
             //If user cannot afford to purchase a new weapon, don't allow them to
             if (currency < gunPrice) {
                 gunButton.setEnabled(false);
-                needLabel.setText("You need " + (userTower.getCoins() - gunPrice) + "more coins!");
+                needLabel.setText("You need " + (gunPrice - userTower.getCoins()) + " more coins!");
                 //Display the proper image for next purchase
                 switch (gunTier + 1) {
                     case (2):
@@ -100,7 +104,7 @@ public class vendor extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         //Need to recapture gunPrice and and gunTier
-                        Gun storeGun = new Gun(userTower.getGun().getGunTier());
+                        Gun storeGun = new Gun(userTower.getGun().getGunTier()+1);
                         int gunTier = storeGun.getGunTier();
                         int gunPrice = storeGun.getCost();
                         int currency = userTower.getCoins();

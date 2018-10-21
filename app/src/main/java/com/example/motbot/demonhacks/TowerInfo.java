@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.here.android.mpa.common.GeoCoordinate;
+
 public class TowerInfo extends AppCompatActivity {
     int cycleCounter = 1; //will be used to demonstrate proof of concept that weapons can be upgraded
 
@@ -15,10 +17,13 @@ public class TowerInfo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tower_info);
-        final Tower userTower = (Tower) getIntent().getExtras().get("tower");
+
+       // final Tower userTower = (Tower) getIntent().getExtras().get("tower");
+         final Tower userTower = new Tower(new GeoCoordinate(41.878306,-87.625926));
+        userTower.setCoins(200); // demo 200 coins
 
         //Create all our labels and bars
-        TextView healthLabel = (TextView)findViewById(R.id.healthLabel);
+        TextView healthLabel = (TextView)findViewById(R.id.healthlabel);
         TextView timeSurvivedProgress = (TextView)findViewById(R.id.timeSurvivedProgress);
         ProgressBar towerHealthBar = (ProgressBar)findViewById(R.id.towerHealthBar);
         final ImageView gunImage = (ImageView)findViewById((R.id.gunImage));

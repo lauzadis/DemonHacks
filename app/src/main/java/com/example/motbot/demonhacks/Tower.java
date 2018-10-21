@@ -34,7 +34,7 @@ public class Tower implements Serializable {
 
     //Determine how long user has survived
     public double getTimeSurvived(){
-        return (System.currentTimeMillis() - this.TIME_CREATED) / Math.pow(10,6);
+        return (System.currentTimeMillis() - this.TIME_CREATED) / Math.pow(10,3) / 60 /60 / 24;
     }
     //Getters and Setters
     public Gun getGun() {
