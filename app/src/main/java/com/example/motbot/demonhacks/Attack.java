@@ -1,5 +1,7 @@
+package com.example.motbot.demonhacks;
+import com.example.motbot.demonhacks.Tower;
+
 import java.util.Random;
-import com.example.motbot.demonhacks.*;
 
 public class Attack {
     private int mobs;
@@ -40,6 +42,7 @@ public class Attack {
                 mobs + " enemies who did " + damage + ". You gained " +
                 coins + " coins in the attack!";
     }
+    //Getters and Setters
     public int getMobs() {
         return mobs;
     }
