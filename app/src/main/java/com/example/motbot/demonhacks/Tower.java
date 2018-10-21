@@ -13,6 +13,11 @@ public class Tower {
     private int coins = 0;
     private GeoCoordinate geo = new GeoCoordinate(0,0,0);
     //Constructor
+    public Tower(GeoCoordinate geo) {
+        this.geo = geo;
+        setHealth(getMax_health());
+        setShield(getMax_shield());
+    }
     public Tower() {
         setHealth(getMax_health());
         setShield(getMax_shield());
@@ -24,6 +29,14 @@ public class Tower {
 
     public GeoCoordinate getGeoCoordinate() {
         return geo;
+    }
+
+    public void setGun(Gun gun) {
+        this.gun = gun;
+    }
+
+    public void setGeo(GeoCoordinate geo) {
+        this.geo = geo;
     }
 
     public int getHealth() {
