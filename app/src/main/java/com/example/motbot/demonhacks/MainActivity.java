@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
                 GeoCoordinate userLocation = new GeoCoordinate(location.getLatitude(), location.getLongitude(), 0.0);
                 u.setT(new Tower(userLocation));
                 //if e is old, check p and then run bottom
+                //import User u
                 //Has to run no matter what
                 Tower userTower = u.getT();
                 Intent game = new Intent(getApplicationContext(), Game.class);
