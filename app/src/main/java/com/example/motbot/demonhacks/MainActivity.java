@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
         Intent about = new Intent(getApplicationContext(), about.class);
         startActivity(about);
 
+        boolean firstLaunch = true;
         Button login = (Button)findViewById(R.id.login);
         Button vendortest = (Button)findViewById(R.id.vendortest);
 
