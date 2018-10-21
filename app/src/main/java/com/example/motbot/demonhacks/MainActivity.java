@@ -24,9 +24,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
 public class MainActivity extends AppCompatActivity {
 
     String emails = "matas";
@@ -50,9 +47,9 @@ public class MainActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView tv = (TextView)findViewById(R.id.tv);
-                EditText email = (EditText)findViewById(R.id.email);
-                EditText password = (EditText)findViewById(R.id.password);
+                TextView tv = (TextView) findViewById(R.id.tv);
+                EditText email = (EditText) findViewById(R.id.email);
+                EditText password = (EditText) findViewById(R.id.password);
 
                 //Snackbar.make(view, "Login success", 3000);
 
@@ -60,17 +57,15 @@ public class MainActivity extends AppCompatActivity {
                 String e = email.toString();
                 String p = password.toString();
                 //if e is new
-                User u = new User(e, p );
-                LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-                Location location = lm.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
-                GeoCoordinate userLocation = new GeoCoordinate(location.getLatitude(), location.getLongitude(), 0.0);
-                u.setT(new Tower(userLocation));
+                User u = new User(e, p);
                 //if e is old, check p and then run bottom
                 //import User u
                 //Has to run no matter what
                 Tower userTower = u.getT();
                 Intent game = new Intent(getApplicationContext(), Game.class);
+                game.putExtra("tower", userTower);
                 startActivity(game);
+            }});}}
                 /*
 
 
@@ -97,6 +92,8 @@ public class MainActivity extends AppCompatActivity {
                 Intent vendorr = new Intent(getApplicationContext(), vendor.class);
                 startActivity(vendorr);
             }
+
         });
         }
 }
+            */

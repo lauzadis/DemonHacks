@@ -13,7 +13,7 @@ public class TowerInfo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tower_info);
-
+        final Tower userTower = (Tower) getIntent().getExtras().get("tower");
         //Create all our labels and bars
         TextView healthLabel = (TextView)findViewById(R.id.healthLabel);
         TextView timeSurvivedProgress = (TextView)findViewById(R.id.timeSurvivedProgress);
