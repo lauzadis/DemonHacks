@@ -57,16 +57,8 @@ public class Game extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         checkPermissions();
+        }
 
-        Button vendor = (Button)findViewById(R.id.vendortest);
-        vendor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent vendorr = new Intent(getApplicationContext(), vendor.class);
-                startActivity(vendorr);
-            }
-        });
-    }
 
     // Google has deprecated android.app.Fragment class. It is used in current SDK implementation.
     // Will be fixed in future SDK version.

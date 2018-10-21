@@ -53,17 +53,14 @@ public class MainActivity extends AppCompatActivity {
                 //Snackbar.make(view, "Login success", 3000);
 
                 //Check the account - server check
-                String e = email.toString();
-                String p = password.toString();
+               // String e = email.toString();
+               // String p = password.toString();
                 //if e is new
-                User u = new User(e, p);
+                //User u = new User(e, p);
                 //if e is old, check p and then run bottom
                 //import User u
                 //Has to run no matter what
                 //Tower userTower = u.getT();
-
-
-
                 Intent game = new Intent(getApplicationContext(), Game.class);
                // game.putExtra("tower", userTower);
                 startActivity(game);

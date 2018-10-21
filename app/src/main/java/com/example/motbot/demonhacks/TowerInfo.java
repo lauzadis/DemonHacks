@@ -43,7 +43,7 @@ public class TowerInfo extends AppCompatActivity {
                 userTower.repair();
             }
         });
-        Button devGunCycle = (Button)findViewById(R.id.devGunCycle);
+        Button devGunCycle = (Button)findViewById(R.id.devGunChanger);
 
 
         //Setup progressbar values
