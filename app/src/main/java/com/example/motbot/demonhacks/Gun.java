@@ -12,14 +12,18 @@ public class Gun {
     //Each weapon tier has a specific cost to purchase the weapon
     private int cost;
 
+    private String gunName;
+
     /**
      * Create a new gun object with a certain tier - when the Tower is first constructed, it creates a level 1 gun
      */
     Gun(int gunTier){
 
         //Gun Tier must be between 1 and 5
-        if(gunTier <=5 && gunTier >= 1)
+        if(gunTier <=5 && gunTier >= 1) {
             this.gunTier = gunTier;
+            setGunName();
+        }
         else
             System.out.print("ERROR! Gun tier is not between 1 and 5");
     }
@@ -61,5 +65,38 @@ public class Gun {
      */
     public double getGunMultiplier(){
         return this.gunTier/10.0;
+    }
+
+    /**
+     * Sets the class/type of weapon based on tier
+     */
+    public void setGunName(){
+        switch(this.gunTier){
+            case(1):
+                this.gunName = "Handgun";
+                break;
+            case(2):
+                this.gunName = "Varmint Rifle";
+                break;
+            case(3):
+                this.gunName = "Shotgun";
+                break;
+            case(4):
+                this.gunName = "Sniper";
+                break;
+            case(5):
+                this.gunName = "Railgun";
+                break;
+            default:
+                this.gunName = "Fisticuffs";
+        }
+    }
+
+    /**
+     *
+     * @return the name of the gun
+     */
+    public String getGunName(){
+        return this.gunName;
     }
 }
