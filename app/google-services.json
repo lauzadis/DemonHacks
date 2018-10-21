@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "130886862311",
+    "firebase_url": "https://demonhacks-ce62d.firebaseio.com",
+    "project_id": "demonhacks-ce62d",
+    "storage_bucket": "demonhacks-ce62d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:130886862311:android:507773a881abfa11",
+        "android_client_info": {
+          "package_name": "com.example.motbot.demonhacks"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "130886862311-3msaccs2dk6h0gj5gafvf7vnupdpiluc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.motbot.demonhacks",
+            "certificate_hash": "d3484529fbf77a69151327506d5315d839463f59"
+          }
+        },
+        {
+          "client_id": "130886862311-ffseerqhbfvqfq05ivnr250qd2iu3v38.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwTY-82lyHSWixOq_2AoFI3qV-3HTdEW8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "130886862311-ffseerqhbfvqfq05ivnr250qd2iu3v38.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
