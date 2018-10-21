@@ -88,6 +88,7 @@ public class vendor extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 userTower.setCoins(userTower.getCoins()-gunForSale.getCost());
+
                 switch(gunForSale.getGunTier()) {
                     case (2):
                         gunImageButton.setImageResource(R.drawable.Gun2Unavailable);

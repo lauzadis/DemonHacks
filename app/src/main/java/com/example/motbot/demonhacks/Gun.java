@@ -57,9 +57,9 @@ public class Gun {
     }
 
     /**
-     * @return the gun multiplier used to determined the bonus coins awarded after an attack
+     * @return the gun multiplier which affects coins gained per attack
      */
     public double getGunMultiplier(){
-        return gunTier / 10.0;
+        return this.gunTier/10.0;
     }
 }
