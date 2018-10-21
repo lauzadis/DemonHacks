@@ -33,14 +33,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
         Intent about = new Intent(getApplicationContext(), about.class);
         startActivity(about);
 
         boolean firstLaunch = true;
         Button login = (Button)findViewById(R.id.login);
         Button vendortest = (Button)findViewById(R.id.vendortest);
+        Button towerinfotest = (Button)findViewById(R.id.towerinfotest);
         //myRef.child("users").child("0vzWqJzkIQVGEkpyOG8w").child("username").getValue();
 
 
@@ -65,35 +64,24 @@ public class MainActivity extends AppCompatActivity {
                 Intent game = new Intent(getApplicationContext(), Game.class);
                 game.putExtra("tower", userTower);
                 startActivity(game);
-            }});}}
-                /*
-
-
-                if(email.getText().toString().equals(emails) && password.getText().toString().equals(passwords))
-                {
-                    tv.setText("Confirmed");
-                    Intent game = new Intent(getApplicationContext(), Game.class);
-                    startActivity(game);
-                }
-
-                else
-                    tv.setText("False");
-
-            }
-
-                //FirebaseDatabase database = FirebaseDatabase.getInstance();
-                //DatabaseReference myRef = database.getReference();
-            //tv.setText(myRef.child("users").child("0vzWqJzkIQVGEkpyOG8w").child("username").getValue().toString());
-        });
-
+            }});
         vendortest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent vendorr = new Intent(getApplicationContext(), vendor.class);
                 startActivity(vendorr);
             }
-
         });
-        }
+
+        towerinfotest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent towerinfo = new Intent(getApplicationContext(), TowerInfo.class);
+                startActivity(towerinfo);
+            }
+        });
+    }
 }
-            */
+
+
+
