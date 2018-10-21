@@ -1,3 +1,4 @@
+package com.example.motbot.demonhacks;
 import com.example.motbot.demonhacks.*;
 public class Resources {
     private double multiplier;
