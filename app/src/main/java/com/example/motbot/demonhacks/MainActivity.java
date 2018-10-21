@@ -31,6 +31,22 @@ public class MainActivity extends AppCompatActivity {
                 EditText email = (EditText)findViewById(R.id.email);
                 EditText password = (EditText)findViewById(R.id.password);
                 //Snackbar.make(view, "Login success", 3000);
+
+                //Check the account - server check
+                String e = email.toString();
+                String p = password.toString();
+                //if e is new
+                User u = new User(e, p );
+                LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+                Location location = lm.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+                GeoCoordinate userLocation = new GeoCoordinate(location.getLatitude(), location.getLongitude(), 0.0);
+                u.setT(new Tower(userLocation));
+                //if e is old, check p and then run bottom
+                //Has to run no matter what
+                Tower userTower = u.getT();
+                Intent game = new Intent(getApplicationContext(), Game.class);
+                startActivity(game);
+                /*
                 if(email.getText().toString().equals(emails) && password.getText().toString().equals(passwords))
                 {
                     tv.setText("Confirmed");
@@ -42,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
                     tv.setText("False");
 
             }
+            */
         });
 
         vendortest.setOnClickListener(new View.OnClickListener() {
