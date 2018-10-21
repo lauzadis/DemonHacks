@@ -54,9 +54,22 @@ public class Game extends Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         checkPermissions();
+
+        Button shop = (Button)findViewById(R.id.shop);
+        shop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent vendorr = new Intent(getApplicationContext(), vendor.class);
+                startActivity(vendorr);
+            }
+        });
+
         }
 
 
@@ -84,10 +97,10 @@ public class Game extends Activity {
 
                     map = mapFragment.getMap();
 
-
-                    GeoCoordinate userLocation = new GeoCoordinate(latitude, longitude, 0.0);
                     GeoCoordinate storeLocation = new GeoCoordinate(41.878286, -87.625234, 0.0);
                     GeoCoordinate resourceLocation = new GeoCoordinate(41.878792, -87.625963, 0.0);
+                    GeoCoordinate userLocation = new GeoCoordinate(latitude, longitude, 0.0);
+
                     map.setCenter(new GeoCoordinate(latitude, longitude, 0.0),
                             Map.Animation.NONE);
 

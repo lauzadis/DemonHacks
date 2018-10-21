@@ -11,6 +11,12 @@
         android:id="@+id/mapfragment"
         class="com.here.android.mpa.mapping.MapFragment"
         android:layout_width="match_parent"
-        android:layout_height="600dp" />
+        android:layout_height="631dp" />
+
+    <Button
+        android:id="@+id/shop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Shop" />
 
 </LinearLayout>
