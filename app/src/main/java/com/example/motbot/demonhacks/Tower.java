@@ -5,10 +5,10 @@ public class Tower {
     private int max_shield = 0;
     private int health;
     private int shield;
-    private Gun gun = Gun(1);
+    private Gun gun = new Gun(1);
     private int resources = 0;
     private int coins = 0;
-    private GeoCoordinate geo = GeoCoordinate(0,0,0);
+    private GeoCoordinate geo = new GeoCoordinate(0,0,0);
     //Constructor
     public Tower() {
         setHealth(getMax_health());
