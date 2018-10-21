@@ -22,7 +22,11 @@ public class vendor extends AppCompatActivity {
         setContentView(R.layout.activity_vendor);
 
         //Fetch player's maximum money available to spend
-        int currency = User.getT().getCoins();
+
+        final Tower userTower = (Tower) getIntent().getExtras().get("tower");
+        int currency = userTower.getCoins();
+
+  
 
         //Instantiate textfield and both buttons in vending scene
         final TextView coinsLabel = (TextView) findViewById(R.id.coinsLabel);
@@ -34,7 +38,10 @@ public class vendor extends AppCompatActivity {
         coinsLabel.setText(currency + " Coins Available");
 
         //Fetch player's weapon data
-        Gun currentUserGun = User.getT().getGun();
+
+        Gun currentUserGun = userTower.getGun();
+        int gunTier = currentUserGun.getGunTier();
+
 
         int gunTier = currentUserGun.getGunTier();
         int gunPrice;
@@ -47,6 +54,8 @@ public class vendor extends AppCompatActivity {
             gunPrice = 99999;
         }
         //Otherwise fetch the information for the next available weapon
+
+
         else {
             gunPrice = new Gun(gunTier + 1).getCost();
         }
@@ -69,6 +78,7 @@ public class vendor extends AppCompatActivity {
                         gunButton.setImageResource(R.drawable.gun5unavailable);
                         break;
                 }
+
             }
             //If user can afford it, display proper weapon
             else {
@@ -132,9 +142,5 @@ public class vendor extends AppCompatActivity {
                                     }
 
             )
-
-        }
-    }
-
     }//end onCreate
 }//end class
