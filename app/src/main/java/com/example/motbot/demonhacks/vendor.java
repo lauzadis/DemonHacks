@@ -23,7 +23,7 @@ public class vendor extends AppCompatActivity {
 
         //Fetch player's maximum money available to spend
         final Tower userTower = (Tower) getIntent().getExtras().get("tower");
-        final double currency = userTower.getCoins();
+        final int currency = userTower.getCoins();
 
         //Instantiate textfield and both buttons in vending scene
         final TextView coinsLabel = (TextView)findViewById(R.id.coinsLabel);
