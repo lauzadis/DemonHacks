@@ -39,7 +39,7 @@ public class vendor extends AppCompatActivity {
 
         //Determine if user has maxed out weapon
         if(currentUserGun.getGunTier() == 5){
-            gunImageButton.setImageResource(R.drawable.Gun5Max);
+            gunImageButton.setImageResource(R.drawable.gun5max);
             gunImageButton.setEnabled(false);
         }
 
@@ -47,19 +47,19 @@ public class vendor extends AppCompatActivity {
         else if(userTower.getCoins() < purchasePrice){
             switch(gunForSale.getGunTier()) {
                 case (2):
-                    gunImageButton.setImageResource(R.drawable.Gun2Unavailable);
+                    gunImageButton.setImageResource(R.drawable.gun2unavailable);
                     gunImageButton.setEnabled(false);
                     break;
                 case (3):
-                    gunImageButton.setImageResource(R.drawable.Gun3Unavailable);
+                    gunImageButton.setImageResource(R.drawable.gun3unavailable);
                     gunImageButton.setEnabled(false);
                     break;
                 case (4):
-                    gunImageButton.setImageResource(R.drawable.Gun4Unavailable);
+                    gunImageButton.setImageResource(R.drawable.gun4unavailable);
                     gunImageButton.setEnabled(false);
                     break;
                 case (5):
-                    gunImageButton.setImageResource(R.drawable.Gun5Unavailable);
+                    gunImageButton.setImageResource(R.drawable.gun5unavailable);
                     gunImageButton.setEnabled(false);
                     break;
             }
@@ -69,16 +69,16 @@ public class vendor extends AppCompatActivity {
         else{
             switch(gunForSale.getGunTier()) {
                 case (2):
-                    gunImageButton.setImageResource(R.drawable.Gun2withResources);
+                    gunImageButton.setImageResource(R.drawable.gun2withresources);
                     break;
                 case (3):
-                    gunImageButton.setImageResource(R.drawable.Gun3withResources);
+                    gunImageButton.setImageResource(R.drawable.gun3withresources);
                     break;
                 case (4):
-                    gunImageButton.setImageResource(R.drawable.Gun4withResources);
+                    gunImageButton.setImageResource(R.drawable.gun4withresources);
                     break;
                 case (5):
-                    gunImageButton.setImageResource(R.drawable.Gun5withResources);
+                    gunImageButton.setImageResource(R.drawable.gun5withresources);
                     break;
             }
         }
@@ -91,19 +91,19 @@ public class vendor extends AppCompatActivity {
 
                 switch(gunForSale.getGunTier()) {
                     case (2):
-                        gunImageButton.setImageResource(R.drawable.Gun2Unavailable);
+                        gunImageButton.setImageResource(R.drawable.gun2unavailable);
                         gunImageButton.setEnabled(false);
                         break;
                     case (3):
-                        gunImageButton.setImageResource(R.drawable.Gun3Unavailable);
+                        gunImageButton.setImageResource(R.drawable.gun3unavailable);
                         gunImageButton.setEnabled(false);
                         break;
                     case (4):
-                        gunImageButton.setImageResource(R.drawable.Gun4Unavailable);
+                        gunImageButton.setImageResource(R.drawable.gun4unavailable);
                         gunImageButton.setEnabled(false);
                         break;
                     case (5):
-                        gunImageButton.setImageResource(R.drawable.Gun5Unavailable);
+                        gunImageButton.setImageResource(R.drawable.gun5unavailable);
                         gunImageButton.setEnabled(false);
                         break;
                 }
