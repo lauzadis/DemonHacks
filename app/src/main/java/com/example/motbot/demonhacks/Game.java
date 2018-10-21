@@ -19,6 +19,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 import android.util.Log;
 import android.view.Menu;
@@ -55,6 +57,15 @@ public class Game extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         checkPermissions();
+
+        Button vendor = (Button)findViewById(R.id.vendor);
+        vendor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent vendorr = new Intent(getApplicationContext(), vendor.class);
+                startActivity(vendorr);
+            }
+        });
     }
 
     // Google has deprecated android.app.Fragment class. It is used in current SDK implementation.
