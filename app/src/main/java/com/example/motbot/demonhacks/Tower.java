@@ -2,7 +2,9 @@ package com.example.motbot.demonhacks;
 
 import com.here.android.mpa.common.GeoCoordinate;
 
-public class Tower {
+import java.io.Serializable;
+
+public class Tower implements Serializable {
     private int level = 1;
     private int max_health = 1500 * level;
     private int max_shield = 0;
