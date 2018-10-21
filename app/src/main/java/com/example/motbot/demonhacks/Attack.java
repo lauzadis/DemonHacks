@@ -1,5 +1,7 @@
+import com.example.motbot.demonhacks.Tower;
+
 import java.util.Random;
-import com.example.motbot.demonhacks.*;
+package com.example.motbot.demonhacks;
 
 public class Attack {
     private int mobs;

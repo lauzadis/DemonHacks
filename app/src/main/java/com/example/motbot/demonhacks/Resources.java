@@ -1,7 +1,9 @@
-import com.example.motbot.demonhacks.*;
+package com.example.motbot.demonhacks;
+import com.here.android.mpa.common.GeoCoordinate;
+
 public class Resources {
     private double multiplier;
-    private GeoCoordinate geo = GeoCoordinate(0,0,0);
+    private GeoCoordinate geo = new GeoCoordinate(0,0,0);
     private double distance;
     public final double WALK_MULTIPLIER = 2.5;
     public final double BIKE_MULTIPLIER = 1.5;
