@@ -1,6 +1,6 @@
 package com.example.motbot.demonhacks;
-import com.here.android.mpa.common.GeoCoordinate;
 
+import com.here.android.mpa.common.GeoCoordinate;
 public class Resources {
     private double multiplier;
     private GeoCoordinate geo = new GeoCoordinate(0,0,0);

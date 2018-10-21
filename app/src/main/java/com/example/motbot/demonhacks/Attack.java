@@ -42,6 +42,7 @@ public class Attack {
                 mobs + " enemies who did " + damage + ". You gained " +
                 coins + " coins in the attack!";
     }
+    //Getters and Setters
     public int getMobs() {
         return mobs;
     }
