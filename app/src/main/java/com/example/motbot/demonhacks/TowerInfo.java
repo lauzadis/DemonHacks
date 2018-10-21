@@ -7,15 +7,19 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.here.android.mpa.common.GeoCoordinate;
+
 public class TowerInfo extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tower_info);
-        final Tower userTower = (Tower) getIntent().getExtras().get("tower");
+       // final Tower userTower = (Tower) getIntent().getExtras().get("tower");
+         final Tower userTower = new Tower(new GeoCoordinate(41.878306,-87.625926));
+        userTower.setCoins(200);
         //Create all our labels and bars
-        TextView healthLabel = (TextView)findViewById(R.id.healthLabel);
+        TextView healthLabel = (TextView)findViewById(R.id.healthlabel);
         TextView timeSurvivedProgress = (TextView)findViewById(R.id.timeSurvivedProgress);
         ProgressBar towerHealthBar = (ProgressBar)findViewById(R.id.towerHealthBar);
         //Creates Action Buttons to create actions for repair and upgrade
