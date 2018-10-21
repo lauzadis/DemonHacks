@@ -22,6 +22,7 @@ public class vendor extends AppCompatActivity {
         setContentView(R.layout.activity_vendor);
 
         //Fetch player's maximum money available to spend
+        final Tower userTower = (Tower) getIntent().getExtras().get("tower");
         final double currency = userTower.getCoins();
 
         //Instantiate textfield and both buttons in vending scene
@@ -35,7 +36,7 @@ public class vendor extends AppCompatActivity {
         coinsLabel.setText(currency + " Coins Available");
 
         //Fetch player's weapon data
-        Gun currentUserGun = user.getGun();
+        Gun currentUserGun = userTower.getGun();
         int gunTier = currentUserGun.getGunTier();
 
         //default values for troubleshooting which should be overwritten anyways
@@ -62,7 +63,7 @@ public class vendor extends AppCompatActivity {
         if(currency < gunPrice){
             gunButton.setEnabled(false);
             affordLabel.setText("You cannot afford the " + gunName);
-            needLabel.setText("You need " + (user.getCoins() - gunPrice) + "more coins!");
+            needLabel.setText("You need " + (userTower.getCoins() - gunPrice) + "more coins!");
         }
         //If can afford it, highlight border and change textto prompt purchasing
         else{
@@ -75,7 +76,7 @@ public class vendor extends AppCompatActivity {
             @Override
             public void onClick(View v) {
             currency = currency - gunPrice;
-            user.setCoins(currency);
+            userTower.setCoins(currency);
             gunButton.setEnabled(false);
             gunButton.setBackgroundColor(696969);
             gunButton.setHighlightColor(000000);
