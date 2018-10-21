@@ -1,6 +1,4 @@
 package com.example.motbot.demonhacks;
-import com.example.motbot.demonhacks.Tower;
-
 import java.util.Random;
 
 

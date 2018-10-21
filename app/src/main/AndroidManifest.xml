@@ -34,7 +34,8 @@
             android:name="com.here.android.maps.apptoken"
             android:value="kb9Xu6ir4ozFt3T2KfmMfg" />
 
-        <activity android:name=".TowerInfo"></activity>
+        <activity android:name=".TowerInfo" />
+        <activity android:name=".userTower"></activity>
     </application>
 
 </manifest>
